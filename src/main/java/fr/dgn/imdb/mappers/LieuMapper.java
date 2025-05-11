@@ -2,7 +2,6 @@ package fr.dgn.imdb.mappers;
 
 import fr.dgn.imdb.dtos.LieuDto;
 import fr.dgn.imdb.entites.Lieu;
-import fr.dgn.imdb.entites.Pays;
 
 public class LieuMapper {
 
@@ -32,7 +31,7 @@ public class LieuMapper {
 		}
 		lieu.setVille(ville.trim());
 		lieu.setRegion(region.trim());
-		lieu.setPays(new Pays(pays.trim()));
+		lieu.setPays(PaysMapper.toEntity(pays.trim()));
 		return lieu;
 	}
 
@@ -43,7 +42,7 @@ public class LieuMapper {
 		Lieu lieu = new Lieu();
 		lieu.setRegion(dto.getEtatDept().trim());
 		lieu.setVille(dto.getVille().trim());
-		lieu.setPays(new Pays(dto.getPays().trim()));
+		lieu.setPays(PaysMapper.toEntity(dto.getPays().trim()));
 		return lieu;
 	}
 }

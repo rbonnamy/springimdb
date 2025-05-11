@@ -2,6 +2,7 @@ package fr.dgn.imdb.entites;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Lieu implements Identifiable<Integer> {
 	
 	private String region;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_pays")
 	private Pays pays;
 	

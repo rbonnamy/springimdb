@@ -5,20 +5,17 @@ import java.util.Objects;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import jakarta.persistence.Cacheable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Genre implements Identifiable<Integer> {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class Genre implements Identifiable<String> {
 	
+	@Id
+	@Column(name="id")
 	private String nom;
 
 	public Genre() {
@@ -48,20 +45,6 @@ public class Genre implements Identifiable<Integer> {
 	}
 
 	/** Getter
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/** Setter
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	/** Getter
 	 * @return the nom
 	 */
 	public String getNom() {
@@ -73,6 +56,11 @@ public class Genre implements Identifiable<Integer> {
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	@Override
+	public String getId() {
+		return nom;
 	}
 	
 }

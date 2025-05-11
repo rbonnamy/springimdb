@@ -29,13 +29,12 @@ public class ImdbApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		FilmDto[] filmsDtos = mapper.readValue(new File("C:/Temp/films.json"), FilmDto[].class);
+		FilmDto[] filmsDtos = mapper.readValue(new File("src/main/resources/films.json"), FilmDto[].class);
 				
 		int compteur = 0;
 		for (FilmDto filmDto: filmsDtos) {
-			
-			filmService.traiterFilm(filmDto);
 			LOGGER.info(++compteur+" -> " + filmDto.getNom());
+			filmService.traiterFilm(filmDto);
 		}
 		
 	}

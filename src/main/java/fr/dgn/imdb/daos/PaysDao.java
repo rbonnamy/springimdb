@@ -6,7 +6,7 @@ import fr.dgn.imdb.entites.Pays;
 import jakarta.persistence.TypedQuery;
 
 @Component
-public class PaysDao extends AbstractDao<Pays, Integer> {
+public class PaysDao extends AbstractDao<Pays, String> {
 
 	@Override
 	public Pays findByCriteria(Pays bean) {

@@ -15,6 +15,10 @@ public class FilmDao extends AbstractDao<Film, String> {
 		return query.getResultStream().findFirst().orElse(null);
 	}
 	
+	public void merge(Film film) {
+		em.merge(film);
+	}
+	
 	@Override
 	public void update(Film filmDb, Film film) {
 		filmDb.setAnneeSortie(film.getAnneeSortie());

@@ -5,27 +5,24 @@ import java.util.Objects;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import jakarta.persistence.Cacheable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Pays implements Identifiable<Integer> {
+public class Pays implements Identifiable<String> {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
+	@Column(name="nom")
 	private String nom;
 	
 	private String url;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(nom, url);
+		return Objects.hash(nom);
 	}
 	
 	public Pays() {
@@ -45,7 +42,7 @@ public class Pays implements Identifiable<Integer> {
 		if (getClass() != obj.getClass())
 			return false;
 		Pays other = (Pays) obj;
-		return Objects.equals(nom, other.nom) && Objects.equals(url, other.url);
+		return Objects.equals(nom, other.nom);
 	}
 
 	/** Getter
@@ -65,15 +62,8 @@ public class Pays implements Identifiable<Integer> {
 	/** Getter
 	 * @return the id
 	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/** Setter
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public String getId() {
+		return nom;
 	}
 
 	/** Getter

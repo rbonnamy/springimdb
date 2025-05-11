@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -30,33 +31,33 @@ public class Film implements Identifiable<String> {
 	
 	private String langue;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_lieu_tournage")
 	private Lieu lieuTournage;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_pays_origine")
 	private Pays pays;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "casting_principal",
 			joinColumns= @JoinColumn(name="ID_FILM", referencedColumnName="ID"),
 			inverseJoinColumns= @JoinColumn(name="ID_ACTEUR", referencedColumnName="ID"))
 	private Set<Personne> acteurs = new HashSet<>();
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "genre_par_film",
 			joinColumns= @JoinColumn(name="ID_FILM", referencedColumnName="ID"),
 			inverseJoinColumns= @JoinColumn(name="ID_GENRE", referencedColumnName="ID"))
 	private Set<Genre> genres = new HashSet<>();
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "role_par_film",
 			joinColumns= @JoinColumn(name="ID_FILM", referencedColumnName="ID"),
 			inverseJoinColumns= @JoinColumn(name="ID_ROLE", referencedColumnName="ID"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "realisateur_par_film",
 			joinColumns= @JoinColumn(name="ID_FILM", referencedColumnName="ID"),
 			inverseJoinColumns= @JoinColumn(name="ID_REALISATEUR", referencedColumnName="ID"))
@@ -64,7 +65,7 @@ public class Film implements Identifiable<String> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(anneeSortie, id, langue, nom, note, resume);
+		return Objects.hash(id, langue, nom, note, resume);
 	}
 
 	@Override

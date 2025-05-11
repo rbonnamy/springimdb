@@ -3,7 +3,9 @@ package fr.dgn.imdb.entites;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -20,7 +22,7 @@ public class Personne implements Identifiable<String> {
 	private String url;
 	private LocalDate dateNaissance;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_lieu_naissance")
 	private Lieu lieuNaissance;
 	
@@ -32,6 +34,25 @@ public class Personne implements Identifiable<String> {
 			inverseJoinColumns= @JoinColumn(name="ID_FILM", referencedColumnName="ID"))
 	private List<Film> films = new ArrayList<>();
 
+	@Override
+	public String toString() {
+		return "Personne [id=" + id + ", identite=" + identite + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personne other = (Personne) obj;
+		return Objects.equals(id, other.id);
+	}
 	/** Getter
 	 * @return the id
 	 */
