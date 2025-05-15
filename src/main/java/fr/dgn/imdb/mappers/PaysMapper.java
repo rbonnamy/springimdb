@@ -15,6 +15,10 @@ public class PaysMapper {
 			return null;
 		}
 		if (cache.get(dto.getNom().trim())!=null) {
+			Pays pays = cache.get(dto.getNom().trim());
+			if (dto.getUrl()!=null) {
+				pays.setUrl(dto.getUrl().trim());
+			}
 			return cache.get(dto.getNom().trim());
 		}
 		Pays bean = new Pays();
